@@ -10,7 +10,7 @@ import re
 # max y-range
 ymax=8
 # files that contain the substring 'obs' are assumed to be data
-data_identifier='obs'
+data_identifier=['data','obs']
 
 def tryint(s):
     try:
@@ -103,7 +103,7 @@ sort_nicely(allfiles)
 obs=[]
 exp=[]
 for a in allfiles:
-    if data_identifier in a:
+    if any(i in a for i in data_identifier):
         obs.append(a)
     else:
         exp.append(a)
@@ -235,14 +235,15 @@ prfld=[]
 for k in ks:
     if not xtitle == k:
         prfld.append(k)
+la4=getLatex(0.5,0.78,xtitle+' = '+k_obs+' ('+k_exp+' exp.)')
 la5=getLatex(0.5,0.85, ', '.join(prfld)+' profiled')
 
 la1=getLatex(0.12,0.95,'Run 1')
 la2=getLatex(0.44,0.95,'5.1 fb^{-1} (7 TeV) + 19.7 fb^{-1} (8 TeV)')
 la1.Draw()
 la2.Draw()
-
 la3.Draw()
+la4.Draw()
 la5.Draw()
 
 gs=[]
