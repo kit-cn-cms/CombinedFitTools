@@ -1,6 +1,11 @@
+# can be used to prepare shell scripts to run coupling fits on cluster
+
 import fitconfig
-fitconfig.workdir='/nfs/dust/cms/user/hmildner/testrecipe/CombinedFitTools/fitting/workdir/'        
-path='/nfs/dust/cms/user/hmildner/testrecipe/summer2013/'
+# script will be stored here
+fitconfig.workdir='/afs/desy.de/user/h/hmildner/workdir/'        
+
+# define workspaces here
+path='/afs/desy.de/user/h/hmildner/workspaces/'
 ws_mc=path+'new_comb_workspace.root'
 ws_asi=path+'asimov.root'
 ws_data=path+'new_comb_workspace.root'
@@ -9,7 +14,8 @@ ws_asi_cpv=path+'asimov_cpv.root'
 ws_data_cpv=path+'new_comb_workspace_cpv.root'
 
 fitconfig.outname='testfits'
-
+# example:
+# run fits of single POI, in given range, with 60 points, freeze kappa_tilde_t, dont freeze remaining POI
 fitconfig.run([ws_mc,ws_data,ws_asi],['kappa_t'],[(0.3,1.7)],60,True,False)
 fitconfig.run([ws_mc,ws_data,ws_asi],['kappa_W'],[(0.4,1.6)],60,True,False)
 fitconfig.run([ws_mc,ws_data,ws_asi],['kappa_Z'],[(0.4,1.6)],60,True,False)

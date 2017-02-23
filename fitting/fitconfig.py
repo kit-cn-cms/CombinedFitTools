@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+# can be used to prepare shell scripts to run coupling fits on cluster
+# start with test.py
+
 import os
 import stat
 from itertools import product
@@ -30,7 +32,7 @@ def makeJob(name,folder,number,ws,pois,rngs,npoints,freezePS,freezePOI,real,firs
         if toysfile!=None:
             cmd+=['--toysFile',toysfile]
     cmd+='--saveInactivePOI 1 -m 125.1'.split()
-    cmd+=['--saveSpecifiedNuis','all']
+#    cmd+=['--saveSpecifiedNuis','all']
     cmd+=('--redefineSignalPOIs '+','.join(pois)).split()
     cmd+=('--algo=grid --points='+str(npoints)).split()
     cmd+=['--firstPoint',str(firstp)]
@@ -74,7 +76,6 @@ def makeJob(name,folder,number,ws,pois,rngs,npoints,freezePS,freezePOI,real,firs
         jobname+='_mc'
     jobname+='.sh'
     createScript(' '.join(cmd),folder,jobname)
-
 
 def run(wss,pois=['kappa_t'],rngs=[(0.0,2.0)],npoints=10,freezePS=True,freezePOI=False,points_per_job=5):
 
