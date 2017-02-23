@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# compares observed and expecxted constraints for anomalous top-higgs coupling
+# usage: python profile2d_obsexp.py filenames
+# example: python profile2d_obsexp.py somefolder/*root
+
 import sys
 import ROOT 
 from math import log

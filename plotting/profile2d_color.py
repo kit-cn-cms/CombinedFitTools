@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# plots constraints for anomalous top-higgs coupling
+# usage: python profile2d_color.py filenames
+# example: python profile2d_color.py somefolder/*root
+# requires recent root version e.g. the one in CMSSW_8_X
 import sys
 import ROOT 
 from math import log
@@ -7,7 +11,11 @@ from math import exp
 from math import pi
 ROOT.gROOT.SetBatch(True)
 ROOT.gStyle.SetPalette(ROOT.kLightTemperature)
-#ROOT.gStyle.SetPalette(ROOT.kBeach)
+
+ # files that contain the substring 'obs' are assumed to be data
+data_identifier=['data','obs']
+
+
 def getLatex(x,y,text):
     tests = ROOT.TLatex(x, y,text)
     tests.SetTextFont(42)
@@ -56,14 +64,16 @@ def lnn(beta,err):
 
 
 ##################m
+
 allfiles=sys.argv[1:]
 obs=[]
 exp=[]
 for a in allfiles:
-    if 'obs' in a:
+    if any(i in a for i in data_identifier):
         obs.append(a)
     else:
         exp.append(a)
+
     
 filenamess=[obs,exp]
 colors=[ROOT.kBlack,ROOT.kBlack,ROOT.kRed,ROOT.kBlue,ROOT.kGreen+1]

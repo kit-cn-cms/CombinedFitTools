@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# plots profile likelihood scans
 # usage: python profile1d.py variable filenames
 # example: python profile1d.py kappa_t somefolder/*root
 
@@ -9,7 +9,7 @@ import re
 
 # max y-range
 ymax=8
-# files that contain the substring 'obs' are assumed to be data
+ # files that contain the substring 'obs' are assumed to be data
 data_identifier=['data','obs']
 
 def tryint(s):
